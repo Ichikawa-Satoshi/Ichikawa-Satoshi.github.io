@@ -1,6 +1,6 @@
 ---
 title: "Firm Organization and Dynamics"
-excerpt: # "Short description of portfolio item number 1
+excerpt: Macroeconomics & Applied Economics # "Short description of portfolio item number 1
 collection: portfolio
 ---
 
