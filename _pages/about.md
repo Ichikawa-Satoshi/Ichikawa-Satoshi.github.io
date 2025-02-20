@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Satoshi Ichikawa's personal websites"
+title: "Home"
 author_profile: true
 redirect_from: 
   - /about/
@@ -10,8 +10,7 @@ redirect_from:
 Welcome to my page!
 I'm a MA student in Economics at Keio University
 
-
-## Research Interest/Projects
+## Research interests
 - Macroeconomics
   - Structural Transformation
   - Firm Organization and Productivity
@@ -20,7 +19,6 @@ I'm a MA student in Economics at Keio University
 ## Working Papers
 
 ## Publications
-
 
 ## Contact
 - E-mail (Keio University): sato41kawa0707@keio.jp
