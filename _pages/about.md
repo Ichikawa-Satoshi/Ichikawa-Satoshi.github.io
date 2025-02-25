@@ -16,9 +16,5 @@ I'm a MA student in Economics at Keio University
   - Firm Organization and Productivity
 - Applied Economics
 
-## Working Papers
-
-## Publications
-
 ## Contact
 - E-mail (Keio University): sato41kawa0707@keio.jp
