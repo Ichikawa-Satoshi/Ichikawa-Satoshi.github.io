@@ -8,13 +8,24 @@ redirect_from:
 ---
 
 Welcome to my page!
+
 I'm a MA student in Economics at Keio University
+
+## CV and E-mail
+- CV
+- E-mail (Keio University): sato41kawa0707@keio.jp
 
 ## Research interests
 - Macroeconomics
   - Structural Transformation
-  - Firm Organization and Productivity
-- Applied Economics
+  - Trade
+  - Servitization
+- Organizational Economics
+  - Firm Organization
+  - Hierarchy
+  - Productivity
 
-## Contact
-- E-mail (Keio University): sato41kawa0707@keio.jp
+## Research Projects / Working Papers
+
+## Publications
+
