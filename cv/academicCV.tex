@@ -1,0 +1,125 @@
+% Satoshi Ichikawa -- academic CV
+% Inspired by the section typography and rule-separated design of
+% Andrea Atencio's publicly available CV (UIUC Economics).
+% Compile with pdfLaTeX (Overleaf default).
+% Verify all research statuses, dates, titles and RA descriptions before submission.
+\documentclass[10pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newtxtext}
+\usepackage[margin=0.68in,top=0.53in,bottom=0.46in]{geometry}
+\usepackage{microtype}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,urlcolor=black,linkcolor=black,
+  pdftitle={Satoshi Ichikawa - Academic CV},
+  pdfauthor={Satoshi Ichikawa}}
+\urlstyle{same}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{0pt}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+\pagestyle{empty}
+
+% Section heading: elegant small caps, with a fine rule BELOW the heading.
+\newcommand{\cvsection}[1]{%
+  \par\addvspace{4pt}%
+  \Needspace{3\baselineskip}%
+  {\noindent\fontsize{13.5}{15}\selectfont\scshape #1\par}%
+  \vspace{2pt}%
+  \hrule height 0.6pt
+  \vspace{3pt}%
+}
+% Main entry: left description and right-aligned date.
+\newcommand{\cvrow}[2]{%
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X@{\hspace{0.9em}}>{\raggedleft\arraybackslash}p{1.38in}@{}}
+    #1 & #2 \\
+  \end{tabularx}\par
+}
+\newcommand{\cvsubline}[1]{{\small #1\par}}
+\newcommand{\cvpaper}[2]{%
+  \Needspace{2\baselineskip}%
+  \noindent\textbf{#1}\par
+  \cvsubline{#2}
+  \vspace{1pt}%
+}
+\setlist[itemize]{
+  leftmargin=1.4em,label=\textbullet,
+  topsep=0.5pt,itemsep=0.5pt,parsep=0pt,partopsep=0pt
+}
+
+\begin{document}
+% Identity header.
+{\fontsize{21.5}{24}\selectfont\bfseries Satoshi Ichikawa\par}
+\vspace{2pt}
+Graduate School of Economics, Keio University\par
+\href{mailto:sato41kawa0707@keio.jp}{sato41kawa0707@keio.jp}
+
+\cvsection{Education}
+\cvrow{Ph.D. in Economics, \textbf{Keio University}}{2025--Present}
+\cvsubline{Advisor: Ippei Fujiwara}
+\vspace{0.5pt}
+\cvrow{M.A. in Economics, \textbf{Keio University}}{2024--2025}
+\cvsubline{Advisor: Ippei Fujiwara}
+\vspace{0.5pt}
+\cvrow{B.A. in Economics, \textbf{Keio University}}{2020--2024}
+\cvsubline{Advisor: Teruo Nakatsuma}
+
+\cvsection{Research Fields}
+Macroeconomics; International Economics; Firm Organization
+
+\cvsection{Research Papers}
+\cvpaper{Organizational Structure, Reporting Networks, and Productivity}%
+  {Working paper. Joint work with Tatsuro Senga.}
+\cvpaper{Structural Transformation and Service Trade in Japan}%
+  {Master's thesis, Keio University, 2025.}
+\cvpaper{Multinational Firms and International Capital Allocation}%
+  {Work in progress. Joint work with Michael Devereux, Ippei Fujiwara, Shinnosuke Kikuchi, and Fangyuan Yi.}
+\cvpaper{Estimating New-Keynesian Phillips Curve under HSA}%
+  {Work in progress. Joint work with Ippei Fujiwara and James Morley.}
+
+\cvsection{Research Experience}
+
+\cvrow{\textbf{Research Assistant}, RIETI (for Ippei Fujiwara and Shinnosuke Kikuchi)}{2025--Present}
+\cvsubline{\textit{Roles of International Finance in Industry Specialization and the Macroeconomy}}
+\begin{itemize}
+  \item S. Kikuchi (2026). ``Balassa--Samuelson in the Long Run: Qualitative Success, Quantitative Limits.'' \textit{RIETI Discussion Paper Series}, 26-E-012.
+\end{itemize}
+\cvsubline{\textbf{Responsibilities:} Microdata collection and linkage (Stata); empirical research design; numerical computations (Julia).}
+
+\vspace{2pt}
+\cvrow{\textbf{Research Assistant}, RIETI (for Ippei Fujiwara and Shinnosuke Kikuchi)}{2023--2025}
+\cvsubline{\textit{Macroeconomy and Automation}}
+\begin{itemize}
+  \item S. Kikuchi, I. Fujiwara, and T. Shirota (2024). ``Automation and Disappearing Routine Occupations in Japan.'' \textit{Journal of the Japanese and International Economies}, 74, 101338.
+  \item S. Kikuchi (2024). ``Automation and Offshoring on Wage Inequality in Japan.'' \textit{RIETI Discussion Paper Series}, 24-E-046.
+\end{itemize}
+\cvsubline{\textbf{Responsibilities:} Data collection and construction; empirical analysis (Stata); data harmonization and crosswalk development.}
+
+
+\cvsection{Work Experience}
+\cvrow{\textbf{Adjunct Researcher (Teaching Assistant)}, Keio University}{2025--Present}
+\cvsubline{Faculty of Economics}
+\cvsubline{Teaching support: International Finance, Introduction to Econometrics, and Development Economics.}
+\vspace{2pt}
+\cvrow{\textbf{Data Analyst Intern}, AI inside Inc.}{2023--2024}
+
+\cvsection{Presentations}
+\cvrow{\textbf{Yonsei--Keio Graduate Student Workshop}}{Aug. 2025}
+\cvsubline{``From Charts to Networks: Firm Organizational Structure and Productivity,'' Yonsei University, Seoul, South Korea.}
+
+\cvsection{Awards, Grants, and Scholarships}
+\cvrow{\textbf{Keio-SPRING Fellowship (JST SPRING Program)}}{2025--Present}
+\cvsubline{Keio University}
+\vspace{2pt}
+\cvrow{\textbf{Silver Medal, Kaggle}}{2022}
+\cvsubline{JPX Tokyo Stock Exchange Prediction (Top 2.6\% of 2,033 teams).}
+
+\cvsection{Skills}
+\textbf{Computing:} Stata, Python, R, MATLAB, Julia\par
+\textbf{Languages:} Japanese, English
+
+\end{document}
