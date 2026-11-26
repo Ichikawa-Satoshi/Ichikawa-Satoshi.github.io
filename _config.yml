@@ -5,6 +5,8 @@ baseurl: ""
 # Publish the standalone site and CV from this branch.
 include:
   - index.html
+  - robots.txt
+  - sitemap.xml
   - cv
   - academicCV.pdf
 exclude:
