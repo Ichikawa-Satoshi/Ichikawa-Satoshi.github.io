@@ -176,14 +176,14 @@ footer a:hover{color:var(--fg)}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#index">Satoshi Ichikawa</a>
-    <nav class="nav" aria-label="Main"><span class="pill" aria-hidden="true"></span><a data-nav="/" href="#index">Home</a><a data-nav="/research" href="#research">Research</a></nav>
+    <nav class="nav" aria-label="Main"><span class="pill" aria-hidden="true"></span><a data-nav="/" href="#index">Home</a><a data-nav="/research" href="research/">Research</a></nav>
   </div>
 </header>
 
 <main id="app"><div class="wrap">
   <section class="hero">
     <h1 class="name">Satoshi Ichikawa</h1>
-    <p class="affiliation">Graduate School of Economics, Keio University</p>
+    <p class="affiliation">PhD Student in Economics<br>Graduate School of Economics, Keio University</p>
     <p class="profile-links"><a href="mailto:sato41kawa0707@keio.jp">sato41kawa0707@keio.jp</a></p>
     <p class="profile-links"><a href="cv/academicCV.pdf" download="Satoshi-Ichikawa-CV.pdf">Download CV (PDF)</a></p>
   </section>
@@ -308,7 +308,7 @@ const V = {
 "/": () => `<div class="wrap">
   <section class="hero">
     <h1 class="name">Satoshi Ichikawa</h1>
-    <p class="affiliation">Graduate School of Economics, Keio University</p>
+    <p class="affiliation">PhD Student in Economics<br>Graduate School of Economics, Keio University</p>
     <p class="profile-links"><a href="mailto:sato41kawa0707@keio.jp">sato41kawa0707@keio.jp</a></p>
     <p class="profile-links"><a href="cv/academicCV.pdf" download="Satoshi-Ichikawa-CV.pdf">Download CV (PDF)</a></p>
   </section>
@@ -409,6 +409,10 @@ function watchName(r){
 
 let first = true;
 function go(){
+  if (location.hash === "#research") {
+    location.replace("research/");
+    return;
+  }
   if (location.hash === "#cv") {
     location.replace("cv/academicCV.pdf");
     return;
