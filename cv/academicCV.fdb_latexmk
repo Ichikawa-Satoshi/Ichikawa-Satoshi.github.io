@@ -1,14 +1,11 @@
 # Fdb version 4
-["pdflatex"] 1792656183.53425 "/Users/satoshi/GitHub/Ichikawa-Satoshi.github.io/cv/academicCV.tex" "academicCV.pdf" "academicCV" 1792656183.94877 0
-  "/Users/satoshi/GitHub/Ichikawa-Satoshi.github.io/cv/academicCV.tex" 1792656183.34415 5131 7cf0bdadef7f1cb5bdb85cd453931c17 ""
-  "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf-pc.enc" 1698694482 3136 bbe665bd0bb471a2da1e8fd326cff9fa ""
+["pdflatex"] 1795704136.92898 "academicCV.tex" "academicCV.pdf" "academicCV" 1795704137.79307 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc" 1698694482 2914 fdbc4a54b9bc76f4551b5303f2737d33 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc" 1529098226 3124 3813fd4c981d99822890a2861b0d274c ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm" 1136768653 3584 adb004a0c8e7c46ee66cad73671f37b4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Bold-tlf-t1.tfm" 1708895146 11564 e66d72473587e55f718c159f23e34b6e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Italic-tlf-t1.tfm" 1708895146 11524 8ba2f557ba7dc63d1e9e4c8cc65c9b60 ""
-  "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-sc-t1.tfm" 1708895146 12276 8de6ae5fb2f9bd3a12436b80d518726e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-t1.tfm" 1708895146 11580 86fb9f1fbe830bcc3e5ca9d9fb704e6b ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm" 1255129411 1600 20cdf11dab97d5d39e847571f9314407 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmb.pfb" 1698694482 255251 958c6ad4e5518904a53cf1118c612893 ""
@@ -88,9 +85,9 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1763124256 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1763124092 3345742 2d696b0419451a9ed88189472f15d7ac ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "academicCV.aux" 1792656183.91114 162 55205a9e8a8eca30d36afb389b0617bf "pdflatex"
-  "academicCV.out" 1792656183.78785 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "academicCV.tex" 1792656183.34415 5131 7cf0bdadef7f1cb5bdb85cd453931c17 ""
+  "academicCV.aux" 1795704137.71003 162 55205a9e8a8eca30d36afb389b0617bf "pdflatex"
+  "academicCV.out" 1795704137.48131 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "academicCV.tex" 1795704136.68064 6258 597d696f814ce8abe83289dca9b5feaa ""
   (generated)
   "academicCV.aux"
   "academicCV.log"

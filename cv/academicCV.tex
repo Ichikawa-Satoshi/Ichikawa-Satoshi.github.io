@@ -7,11 +7,12 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{newtxtext}
-\usepackage[margin=0.68in,top=0.53in,bottom=0.46in]{geometry}
+\usepackage[letterpaper,left=0.7in,right=0.7in,top=0.48in,bottom=0.46in]{geometry}
 \usepackage{microtype}
 \usepackage{tabularx}
 \usepackage{enumitem}
 \usepackage{needspace}
+\usepackage{xcolor}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,urlcolor=black,linkcolor=black,
   pdftitle={Satoshi Ichikawa - Academic CV},
@@ -24,31 +25,38 @@
 \raggedbottom
 \pagestyle{empty}
 
-% Section heading: elegant small caps, with a fine rule BELOW the heading.
+\definecolor{sectionink}{HTML}{000000}
+\definecolor{secondary}{HTML}{3F4143}
+\definecolor{sectionrule}{HTML}{C5C0C1}
+\newcommand{\detailfont}{\fontsize{10}{12.3}\selectfont\color{secondary}}
 \newcommand{\cvsection}[1]{%
-  \par\addvspace{4pt}%
+  \par\addvspace{6pt}%
   \Needspace{3\baselineskip}%
-  {\noindent\fontsize{13.5}{15}\selectfont\scshape #1\par}%
-  \vspace{2pt}%
-  \hrule height 0.6pt
-  \vspace{3pt}%
+  \noindent{\fontsize{12.4}{14}\selectfont\bfseries\color{sectionink}#1}%
+  \nobreak\hspace{0.75em}{\color{sectionrule}\leaders\hrule height 3.5pt depth -3.1pt\hfill\kern0pt}\par
+  \nobreak\vspace{3pt}%
 }
-% Main entry: left description and right-aligned date.
 \newcommand{\cvrow}[2]{%
-  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X@{\hspace{0.9em}}>{\raggedleft\arraybackslash}p{1.38in}@{}}
-    #1 & #2 \\
+  \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X@{\hspace{1em}}r@{}}
+    #1 & {\detailfont #2}
   \end{tabularx}\par
 }
-\newcommand{\cvsubline}[1]{{\small #1\par}}
+\newcommand{\degree}[3]{%
+  \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X@{\hspace{1em}}>{\raggedright\arraybackslash}p{1.8in}@{\hspace{1em}}>{\raggedleft\arraybackslash}p{0.95in}@{}}
+    #1 & \leavevmode{\detailfont Advisor: #2} & \leavevmode{\detailfont #3}
+  \end{tabularx}\par
+}
+\newcommand{\cvsubline}[1]{%
+  {\detailfont\raggedright\leftskip=0.9em\relax #1\par}%
+}
 \newcommand{\cvpaper}[2]{%
   \Needspace{2\baselineskip}%
-  \noindent\textbf{#1}\par
-  \cvsubline{#2}
-  \vspace{1pt}%
+  \textbf{#1}\par\cvsubline{#2}%
+  \vspace{3.2pt}%
 }
 \setlist[itemize]{
-  leftmargin=1.4em,label=\textbullet,
-  topsep=0.5pt,itemsep=0.5pt,parsep=0pt,partopsep=0pt
+  leftmargin=2em,label=\textbullet,
+  before=\detailfont,topsep=2pt,itemsep=1pt,parsep=0pt,partopsep=0pt
 }
 
 \begin{document}
@@ -56,70 +64,78 @@
 {\fontsize{21.5}{24}\selectfont\bfseries Satoshi Ichikawa\par}
 \vspace{2pt}
 Graduate School of Economics, Keio University\par
-\href{mailto:sato41kawa0707@keio.jp}{sato41kawa0707@keio.jp}
+\href{mailto:sato41kawa0707@keio.jp}{sato41kawa0707@keio.jp}%
+\hspace{0.65em}\textcolor{secondary}{\textperiodcentered}\hspace{0.65em}%
+\href{https://ichikawa-satoshi.github.io/}{\underline{Personal Website}}
 
 \cvsection{Education}
-\cvrow{Ph.D. in Economics, \textbf{Keio University}}{2025--Present}
-\cvsubline{Advisor: Ippei Fujiwara}
-\vspace{0.5pt}
-\cvrow{M.A. in Economics, \textbf{Keio University}}{2024--2025}
-\cvsubline{Advisor: Ippei Fujiwara}
-\vspace{0.5pt}
-\cvrow{B.A. in Economics, \textbf{Keio University}}{2020--2024}
-\cvsubline{Advisor: Teruo Nakatsuma}
+\degree{Ph.D. in Economics, \textbf{Keio University}}{Ippei Fujiwara}{2025--Present}
+\vspace{2pt}
+\degree{M.A. in Economics, \textbf{Keio University}}{Ippei Fujiwara}{2024--2025}
+\vspace{2pt}
+\degree{B.A. in Economics, \textbf{Keio University}}{Teruo Nakatsuma}{2020--2024}
 
 \cvsection{Research Fields}
 Macroeconomics; International Economics; Firm Organization
 
-\cvsection{Research Papers}
-\cvpaper{Organizational Structure, Reporting Networks, and Productivity}%
-  {Working paper. Joint work with Tatsuro Senga.}
+\cvsection{Research}
+\cvpaper{Firm Organization, Reporting Networks, and Productivity}%
+  {Working paper. Joint work with Tatsuro Senga.
+   \href{https://drive.google.com/file/d/1VI-d3kMYoJy-kwYhLVeB8qRLvcWO4VkW/view}{\underline{[Paper]}}}
 \cvpaper{Structural Transformation and Service Trade in Japan}%
-  {Master's thesis, Keio University, 2025.}
+  {Working paper.
+   \href{https://drive.google.com/file/d/1_ZGaFxfDzEyqtWS2NbDP1NWLgnV5vnOi/view}{\underline{[Paper]}}}
 \cvpaper{Multinational Firms and International Capital Allocation}%
   {Work in progress. Joint work with Michael Devereux, Ippei Fujiwara, Shinnosuke Kikuchi, and Fangyuan Yi.}
-\cvpaper{Estimating New-Keynesian Phillips Curve under HSA}%
+\cvpaper{Estimating New-Keynesian Phillips Curve under Homothetic Single Aggregator}%
   {Work in progress. Joint work with Ippei Fujiwara and James Morley.}
 
-\cvsection{Research Experience}
+\cvsection{Professional Experience}
 
-\cvrow{\textbf{Research Assistant}, RIETI (for Ippei Fujiwara and Shinnosuke Kikuchi)}{2025--Present}
-\cvsubline{\textit{Roles of International Finance in Industry Specialization and the Macroeconomy}}
+\cvrow{\textbf{Research Assistant}, RIETI (for Ippei Fujiwara and Shinnosuke Kikuchi)}{2023--Present}
+\cvsubline{\textit{Roles of International Finance in Industry Specialization and the Macroeconomy} (2025--Present)}
+\cvsubline{\textbf{Responsibilities:} Microdata collection and linkage (Stata); empirical research design; numerical computations (Julia).}
 \begin{itemize}
   \item S. Kikuchi (2026). ``Balassa--Samuelson in the Long Run: Qualitative Success, Quantitative Limits.'' \textit{RIETI Discussion Paper Series}, 26-E-012.
 \end{itemize}
-\cvsubline{\textbf{Responsibilities:} Microdata collection and linkage (Stata); empirical research design; numerical computations (Julia).}
 
-\vspace{2pt}
-\cvrow{\textbf{Research Assistant}, RIETI (for Ippei Fujiwara and Shinnosuke Kikuchi)}{2023--2025}
-\cvsubline{\textit{Macroeconomy and Automation}}
+\vspace{4pt}
+\cvsubline{\textit{Macroeconomy and Automation} (2023--2025)}
+\cvsubline{\textbf{Responsibilities:} Data collection and construction; empirical analysis (Stata); data harmonization and crosswalk development.}
 \begin{itemize}
   \item S. Kikuchi, I. Fujiwara, and T. Shirota (2024). ``Automation and Disappearing Routine Occupations in Japan.'' \textit{Journal of the Japanese and International Economies}, 74, 101338.
   \item S. Kikuchi (2024). ``Automation and Offshoring on Wage Inequality in Japan.'' \textit{RIETI Discussion Paper Series}, 24-E-046.
 \end{itemize}
-\cvsubline{\textbf{Responsibilities:} Data collection and construction; empirical analysis (Stata); data harmonization and crosswalk development.}
-
-
-\cvsection{Work Experience}
+\vspace{4pt}
 \cvrow{\textbf{Adjunct Researcher (Teaching Assistant)}, Keio University}{2025--Present}
 \cvsubline{Faculty of Economics}
 \cvsubline{Teaching support: International Finance, Introduction to Econometrics, and Development Economics.}
-\vspace{2pt}
+\vspace{4pt}
 \cvrow{\textbf{Data Analyst Intern}, AI inside Inc.}{2023--2024}
 
 \cvsection{Presentations}
+\cvrow{\textbf{\href{https://personneleconomics.eu/cope2027/}{29th Colloquium on Personnel Economics (COPE)}}}{Mar. 2027 (scheduled)}
+\cvsubline{Waseda University, Tokyo, Japan.}
+\vspace{4pt}
 \cvrow{\textbf{Yonsei--Keio Graduate Student Workshop}}{Aug. 2025}
-\cvsubline{``From Charts to Networks: Firm Organizational Structure and Productivity,'' Yonsei University, Seoul, South Korea.}
+\cvsubline{Yonsei University, Seoul, South Korea.}
 
 \cvsection{Awards, Grants, and Scholarships}
-\cvrow{\textbf{Keio-SPRING Fellowship (JST SPRING Program)}}{2025--Present}
-\cvsubline{Keio University}
-\vspace{2pt}
+\cvrow{\textbf{Support for Pioneering Research Initiated by the Next Generation (SPRING)}}{2025--Present}
+\cvsubline{Japan Science and Technology Agency (JST)}
+\vspace{4pt}
 \cvrow{\textbf{Silver Medal, Kaggle}}{2022}
 \cvsubline{JPX Tokyo Stock Exchange Prediction (Top 2.6\% of 2,033 teams).}
 
 \cvsection{Skills}
-\textbf{Computing:} Stata, Python, R, MATLAB, Julia\par
-\textbf{Languages:} Japanese, English
+\textbf{Computing:} Stata, Python, R, MATLAB, Julia\hspace{2em}\textbf{Languages:} Japanese, English\par
+
+\cvsection{References}
+\newcommand{\referee}[3]{\textbf{#1}\par{\detailfont #2\par #3\par}}
+\begin{tabularx}{\linewidth}{@{}*{3}{>{\raggedright\arraybackslash}X}@{}}
+  \referee{Ippei Fujiwara}{Professor of Economics}{Keio University} &
+  \referee{Tatsuro Senga}{Associate Professor of Economics}{Keio University} &
+  \referee{Shinnosuke Kikuchi}{Assistant Professor, GPS}{UC San Diego}
+\end{tabularx}
 
 \end{document}

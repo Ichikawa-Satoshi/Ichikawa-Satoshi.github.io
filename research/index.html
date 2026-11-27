@@ -1,0 +1,832 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Research — Satoshi Ichikawa</title>
+
+<meta name="description" content="Research by Satoshi Ichikawa, Graduate School of Economics, Keio University.">
+<style>
+/* Layout: the main site's Research page, plain at rest (only the heading can be played with). Clicking a project opens a project view with a circular reveal from the click point; the title flies into place and the figure prints itself, top to bottom. All projects, Esc or the browser's back button return to the list. */
+:root{
+  --bg:#ffffff; --fg:#171719; --soft:#343537; --mute:#56585b; --line:#d6d7d9; --tint:#f4f4f5;
+  --header-bg:#232427; --header-ink:#ffffff; --header-link:#e9e9ea;
+  --acc:#2b2c2f; --section-rule:#707175; --detail-accent:#8c263a;
+  --card:rgba(255,255,255,.94); --shadow:0 24px 60px -32px rgba(23,23,25,.35);
+  --particle:#3a3b3f; --glyph:#8a8c90;
+  --serif:Georgia,"Times New Roman",serif;
+  --ease:cubic-bezier(.65,0,.15,1); --out:cubic-bezier(.16,1,.3,1);
+  --w:1040px; --pad:clamp(20px,4vw,40px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#131415; --fg:#f0f0f0; --soft:#d2d2d3; --mute:#b4b5b7; --line:#38393c; --tint:#222326;
+  --header-bg:#343539; --header-ink:#ffffff; --header-link:#e9e9ea;
+  --acc:#e1e1e3; --section-rule:#78797c; --detail-accent:#efa7b5;
+  --card:rgba(26,27,29,.94); --shadow:0 24px 60px -30px rgba(0,0,0,.8);
+  --particle:#e4e4e6; --glyph:#8e9094;
+}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#131415; --fg:#f0f0f0; --soft:#d2d2d3; --mute:#b4b5b7; --line:#38393c; --tint:#222326;
+  --header-bg:#343539; --header-ink:#ffffff; --header-link:#e9e9ea;
+  --acc:#e1e1e3; --section-rule:#78797c; --detail-accent:#efa7b5;
+  --card:rgba(26,27,29,.94); --shadow:0 24px 60px -30px rgba(0,0,0,.8);
+  --particle:#e4e4e6; --glyph:#8e9094;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+html.viewing{overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 var(--serif);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--acc);color:var(--bg)}
+:focus-visible{outline:2px solid var(--detail-accent);outline-offset:3px;border-radius:2px}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty;margin:0}
+button{font:inherit;color:inherit}
+.wrap{max-width:var(--w);margin:0 auto;padding-left:max(var(--pad),env(safe-area-inset-left,0px));padding-right:max(var(--pad),env(safe-area-inset-right,0px))}
+.label{font:400 11.5px/1.4 var(--serif);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+
+.backdrop{position:fixed;inset:calc(60px + env(safe-area-inset-top,0px)) 0 0;overflow:hidden;opacity:0;pointer-events:none;
+  mask-image:linear-gradient(90deg,#000,transparent 24%,transparent 76%,#000)}
+.backdrop canvas{width:100%;height:100%;display:block}
+
+/* header, as on the main site */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--header-bg);color:var(--header-ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--header-bg)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+.brand{font:400 16px/1 var(--serif)}
+.nav{display:flex;gap:26px}
+.nav a{position:relative;padding:8px 0;font-size:13.5px;color:var(--header-link);transition:color .35s}
+.nav a:hover,.nav a.on{color:var(--header-ink)}
+.nav a.on::after{content:"";position:absolute;left:0;right:0;bottom:3px;height:1px;background:var(--header-ink)}
+
+main{position:relative;z-index:1}
+.page-h{padding:clamp(48px,9vh,96px) 0 clamp(32px,6vh,56px)}
+.page-h h1{position:relative;display:inline-block;font:400 clamp(36px,5vw,52px)/1.14 var(--serif);letter-spacing:-.018em;margin:0;cursor:default;-webkit-user-select:none;user-select:none}
+.page-h h1.live .h-txt{color:transparent}
+.h-cv{position:absolute;left:-80px;top:-60px;width:calc(100% + 160px);height:calc(100% + 120px);pointer-events:none;visibility:hidden}
+.page-h h1.live .h-cv{visibility:visible}
+
+.sec{padding:0 0 clamp(56px,9vh,96px)}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0 10px;position:relative}
+.sec-h::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--section-rule)}
+.sec-h::after{content:"";position:absolute;top:0;left:0;width:44px;height:3px;background:var(--detail-accent)}
+.sec-h h2{margin:0;font:700 14px/1.4 var(--serif);color:var(--acc)}
+.fields{color:var(--soft)}
+
+.presentations{margin:0;padding:0;list-style:none}
+.presentations li{display:grid;grid-template-columns:10rem 1fr;align-items:baseline;gap:4px 20px;padding:14px 0;border-bottom:1px solid var(--line)}
+.presentation-date{font-size:13px;color:var(--mute)}
+.presentations a{text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.presentations a:hover{color:var(--detail-accent)}
+@media(max-width:600px){.presentations li{grid-template-columns:1fr}}
+
+/* ── list ── */
+.proj{position:relative;border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:44px 36px minmax(0,1fr) 140px 20px;gap:20px;align-items:center;padding:18px 0;cursor:pointer;position:relative;isolation:isolate}
+.row::after{content:"";position:absolute;inset:0 calc(var(--pad)*-.5);background:var(--tint);border-radius:10px;z-index:-1;opacity:0;transform:scaleY(.92);transition:opacity .4s,transform .5s var(--out)}
+.row:hover::after{opacity:1;transform:none}
+.n{font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+.glyph{width:32px;height:32px;display:block}
+.ttl{display:block;background:none;border:0;padding:0;text-align:left;cursor:pointer;font:400 clamp(16px,1.5vw,17.5px)/1.35 var(--serif);color:var(--fg);transition:color .3s;width:fit-content}
+.row:hover .ttl{color:var(--detail-accent)}
+.by{display:block;margin-top:2px;color:var(--mute);font-size:12.5px;line-height:1.4}
+.st{font-size:12.5px;color:var(--mute)}
+.ind{justify-self:end;color:var(--detail-accent);font-size:16px;line-height:1;transition:transform .5s var(--out)}
+.ind::before{content:"→"}
+.row:hover .ind{transform:translateX(4px)}
+
+/* ── project view ── */
+.view{position:fixed;inset:calc(60px + env(safe-area-inset-top,0px)) 0 0;z-index:15;background:var(--bg);overflow:auto;overscroll-behavior:contain;visibility:hidden;opacity:0}
+html.viewing .view{visibility:visible;opacity:1}
+html.no-vt .view{transition:opacity .45s var(--out),visibility .45s}
+.view-in{position:relative;z-index:1;padding-block:22px 48px}
+.vbar{display:flex;align-items:center;gap:16px;padding-bottom:18px;margin-bottom:24px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--mute)}
+.vbar button{background:none;border:0;padding:8px 0;cursor:pointer;color:var(--fg);font-size:13.5px}
+.vbar button:hover{color:var(--detail-accent)}
+.vbar button:disabled{color:var(--fg);opacity:.25;cursor:default}
+.vbar .close{margin-right:auto;display:inline-flex;gap:8px;align-items:center}
+.vbar .count{font-variant-numeric:tabular-nums;color:var(--fg);min-width:3.2em;text-align:center}
+.vbar{max-width:680px;margin-inline:auto}
+.vgrid{--frame-gutter:clamp(12px,2vw,24px);overflow:clip;margin-inline:calc(0px - var(--frame-gutter))}
+.stage{position:relative;display:grid;grid-template-columns:minmax(0,1fr);perspective:1500px;touch-action:pan-y;
+  max-width:calc(680px + 2 * var(--frame-gutter));margin-inline:auto}
+.stage.dragging{cursor:grabbing;user-select:none;-webkit-user-select:none}
+.panel{grid-area:1 / 1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;
+  padding:clamp(18px,4vh,42px) calc(var(--frame-gutter) + 2px) 24px;backface-visibility:hidden;
+  border:1px solid color-mix(in srgb,var(--fg) 11%,var(--bg));border-radius:4px}
+.panel[aria-hidden="true"]{pointer-events:none}
+.p-top{font:400 13px/1.5 var(--serif);color:var(--mute);margin-bottom:9px}
+.p-title{margin:0;font:400 clamp(26px,3.1vw,39px)/1.16 var(--serif);letter-spacing:-.025em;width:fit-content}
+.with{color:var(--mute);font-size:15px;line-height:1.5;margin-top:12px}
+.panel .abs{margin-top:30px;max-width:65ch;font:400 clamp(17px,1.5vw,18px)/1.7 var(--serif);color:var(--fg)}
+.panel .abs h3{margin:0 0 10px;font:600 14px/1.4 var(--serif);color:var(--soft)}
+.panel .abs p + p{margin-top:.95em}
+.paper-link{display:inline-flex;align-items:center;min-height:36px;margin-top:22px;font-size:14px;color:var(--detail-accent);text-decoration:underline;text-underline-offset:3px}
+.paper-link:hover{text-decoration-thickness:2px}
+
+/* the transition: the view opens as a circle from where you clicked, and closes back into it */
+::view-transition-group(pt){animation-duration:.8s;animation-timing-function:var(--out)}
+html.vt-open::view-transition-old(root){animation:none}
+html.vt-open::view-transition-new(root){animation:reveal .75s var(--out) both}
+html.vt-close::view-transition-old(root){animation:leave .32s var(--ease) both;z-index:1}
+html.vt-close::view-transition-new(root){animation:none}
+@keyframes leave{to{opacity:0;transform:scale(.99)}}
+@keyframes reveal{from{clip-path:circle(0px at var(--cx) var(--cy))}to{clip-path:circle(var(--cr) at var(--cx) var(--cy))}}
+
+footer{position:relative;z-index:1}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;padding-top:22px;padding-bottom:calc(40px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:var(--mute);font-size:12.5px}
+footer a:hover{color:var(--fg)}
+
+@media (max-width:900px){
+}
+@media (max-width:820px){
+  .row{grid-template-columns:24px 32px minmax(0,1fr) 16px;gap:2px 12px}
+  .n,.glyph{grid-row:1/3}
+  .glyph{width:28px;height:28px}
+  .st{grid-column:3;grid-row:2}
+  .ind{grid-column:4;grid-row:1/3}
+}
+.pager{display:none}
+/* On small screens, the whole article scrolls as a single page. */
+@media (max-width:700px){
+  .view-in{padding-block:8px calc(24px + env(safe-area-inset-bottom,0px))}
+  .vbar{gap:0;padding-bottom:4px;margin-bottom:8px}
+  .vbar button{min-width:44px;min-height:44px;padding:0}
+  .vbar .close{justify-content:flex-start}
+  .panel .abs{margin-top:24px}
+  .pager{display:flex;justify-content:center;flex:none;padding-top:6px}
+  .pager button{width:30px;height:30px;padding:0;border:0;background:none;display:grid;place-items:center;cursor:pointer}
+  .pager button::before{content:"";width:6px;height:6px;border-radius:3px;background:var(--line);transition:width .35s var(--out),background .35s}
+  .pager button[aria-current="true"]::before{width:18px;background:var(--detail-accent)}
+}
+@media (max-width:420px){.nav{gap:14px}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:0s!important}
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
+}
+#view canvas[hidden],.background-choice[hidden]{display:none}
+.background-choice{display:inline-flex;gap:6px;align-items:center;color:var(--mute);font-size:13px}
+.background-choice select{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:3px;padding:5px}
+@media(max-width:700px){.background-choice{margin-right:6px}.background-choice span{display:none}}
+</style>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../">Satoshi Ichikawa</a>
+    <nav class="nav" aria-label="Main"><a href="../">Home</a><a class="on" aria-current="page" href="#top" id="nav-research">Research</a></nav>
+  </div>
+</header>
+
+<main id="top"><div class="wrap">
+  <div class="page-h">
+    <h1 id="heading"><span class="h-txt">Research</span><canvas class="h-cv" aria-hidden="true"></canvas></h1>
+  </div>
+  <section class="sec">
+    <div class="sec-h"><h2>Research Interests</h2></div>
+    <p class="fields">Macroeconomics, International Economics, Firm Organization and Productivity</p>
+  </section>
+  <section class="sec" aria-labelledby="projects-h">
+    <div class="sec-h"><h2 id="projects-h">Research Projects</h2><span class="label">Status</span></div>
+    <div class="list" id="list"></div>
+  </section>
+  <section class="sec" aria-labelledby="presentations-h">
+    <div class="sec-h"><h2 id="presentations-h">Presentations</h2></div>
+    <ul class="presentations">
+      <li>
+        <span class="presentation-date"><time datetime="2027-03">Mar. 2027</time> (scheduled)</span>
+        <div><a href="https://personneleconomics.eu/cope2027/">29th Colloquium on Personnel Economics (COPE)</a><span class="by">Waseda University, Tokyo, Japan</span></div>
+      </li>
+      <li>
+        <span class="presentation-date"><time datetime="2025-08">Aug. 2025</time></span>
+        <div>Yonsei–Keio Graduate Student Workshop<span class="by">Yonsei University, Seoul, South Korea</span></div>
+      </li>
+    </ul>
+  </section>
+</div></main>
+
+<footer><div class="wrap"><span>© 2026 Satoshi Ichikawa</span><span><a href="mailto:sato41kawa0707@keio.jp">sato41kawa0707@keio.jp</a> &nbsp;·&nbsp; <span id="clk">Tokyo</span></span></div></footer>
+
+<div class="view" id="view" role="dialog" aria-modal="true" aria-label="Project" inert>
+  <div class="backdrop" aria-hidden="true">
+    <canvas id="gl"></canvas>
+    <canvas id="print-field" hidden></canvas>
+  </div>
+  <div class="wrap view-in">
+    <div class="vbar">
+      <button class="close" id="close" type="button">← All projects</button>
+      <label class="background-choice" hidden><span>Background</span>
+        <select id="background-choice" aria-label="Background">
+          <option value="particles">Particles</option>
+          <option value="contours">Contours</option>
+          <option value="folds">Folded paper</option>
+          <option value="halftone">Halftone</option>
+        </select>
+      </label>
+      <button id="prev" type="button" aria-label="Previous project">←</button>
+      <span class="count" id="count" aria-live="polite">1 / 4</span>
+      <button id="next" type="button" aria-label="Next project">→</button>
+    </div>
+    <div class="vgrid">
+      <div class="stage" id="stage" aria-roledescription="carousel" aria-label="Projects"></div>
+      <div class="pager" id="pager" role="group" aria-label="Projects"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Project status is either "Working" or "Published".
+const PAPERS = [
+  {id:"service-trade", t:"Structural Transformation and Service Trade in Japan", s:"Working", w:"",
+   url:"https://drive.google.com/file/d/1_ZGaFxfDzEyqtWS2NbDP1NWLgnV5vnOi/view",
+   a:"This paper studies how service imports shape structural transformation in Japan. Using prefectural data for 2008–2018 and instrumenting import exposure with foreign export growth, I find that greater exposure to service imports is associated with a slower shift of employment toward services. A move from the 25th to the 75th percentile of exposure corresponds to a 0.14 percentage-point smaller annual increase in the service employment share, about 37 percent of the average annual increase in the sample. When services are divided by task content into remote and local services, the negative association is concentrated in local services.\n\nTo interpret this pattern, I develop a three-sector small open economy model that reflects Japan’s input–output structure. In the calibrated model, cheaper remote imports shift household spending from local to remote services. This shift lowers the local employment share. In remote services, employment gains from household demand are largely offset by losses in jobs serving exports, leaving the overall service employment share below its no-shock level."},
+  {id:"reporting-networks", t:"Firm Organization, Reporting Networks, and Productivity", s:"Working", w:"Tatsuro Senga",
+   url:"https://drive.google.com/file/d/1VI-d3kMYoJy-kwYhLVeB8qRLvcWO4VkW/view",
+   a:"How do reporting relationships within a firm relate to its productivity? We use large language models to reconstruct reporting networks from published organization charts for 3,450 publicly listed firms in Japan. The charts cover four survey years between 2002 and 2010. Larger firms have more departments, more managerial layers, and more units reporting to each manager. They also have longer reporting paths. Even among firms of similar size and structure, however, some have much shorter paths from front-line units to the rest of the firm. We measure this proximity using reporting closeness. After accounting for firm characteristics and hierarchy, a one-standard-deviation difference in reporting closeness is associated with 4.9% higher revenue-based productivity.\n\nTo explain why these paths might matter, we extend Garicano’s (2000) model to allow departments in the same layer to specialize in different problems. When a department needs expertise from another division, its request travels along the reporting path. A shorter path involves fewer managers, so the firm can handle more requests with the same amount of managerial time."},
+  {id:"multinationals", t:"Multinational Firms and International Capital Allocation", s:"Working", w:"Michael Devereux, Ippei Fujiwara, Shinnosuke Kikuchi, Fangyuan Yi", url:"", a:""},
+  {id:"phillips-curve", t:"Estimating New-Keynesian Phillips Curve under HSA", s:"Working", w:"Ippei Fujiwara, James Morley", url:"", a:""}
+];
+
+</script>
+<script>
+(() => {
+"use strict";
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const narrow = () => innerWidth <= 900;
+const ss = (a,b,x) => { const t = Math.min(1, Math.max(0, (x-a)/(b-a))); return t*t*(3-2*t); };
+const frac = x => x - Math.floor(x);
+const lerp = (a,b,t) => a + (b-a)*t;
+const mod = (a,n) => ((a % n) + n) % n;
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const S = PAPERS.length, ids = PAPERS.map(p => p.id), root = document.documentElement;
+const hasVT = !!document.startViewTransition && !reduce;
+if (!hasVT) root.classList.add("no-vt");
+let DPR = Math.min(2, devicePixelRatio || 1);
+
+const clk = document.getElementById("clk");
+const tick = () => clk.textContent = "Tokyo " + new Date().toLocaleTimeString("en-GB",{timeZone:"Asia/Tokyo",hour:"2-digit",minute:"2-digit"});
+tick(); setInterval(tick, 30000);
+
+const theme = {}, themeListeners = [];
+function readTheme(){
+  const css = getComputedStyle(root), g = n => css.getPropertyValue(n).trim();
+  theme.fg = g("--fg"); theme.glyph = g("--glyph"); theme.acc = g("--detail-accent"); theme.particle = g("--particle");
+  theme.dark = g("--bg").toLowerCase() !== "#ffffff";
+  themeListeners.forEach(f => f());
+}
+matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", readTheme);
+new MutationObserver(readTheme).observe(root, {attributes:true, attributeFilter:["data-theme"]});
+
+/* ───────── list + panels ───────── */
+const listEl = document.getElementById("list"), stage = document.getElementById("stage"), view = document.getElementById("view");
+listEl.innerHTML = PAPERS.map((p,i) => `
+<article class="proj" data-k="${i}">
+  <div class="row">
+    <span class="n">${String(i+1).padStart(2,"0")}</span>
+    <canvas class="glyph" aria-hidden="true"></canvas>
+    <div><button type="button" class="ttl">${esc(p.t)}</button>${p.w ? `<span class="by">with ${esc(p.w)}</span>` : ""}</div>
+    <span class="st">${p.s}</span>
+    <span class="ind" aria-hidden="true"></span>
+  </div>
+</article>`).join("");
+stage.innerHTML = PAPERS.map((p,i) => `
+<article class="panel" role="group" aria-roledescription="slide" aria-label="${i+1} of ${S}">
+  <p class="p-top">${p.s}</p>
+  <h2 class="p-title">${esc(p.t)}</h2>
+  ${p.w ? `<p class="with">with ${esc(p.w)}</p>` : ""}
+  ${p.a ? `<div class="abs"><h3>Abstract</h3>${p.a.split("\n\n").map(text => `<p>${esc(text)}</p>`).join("")}</div>` : ""}
+  ${p.url ? `<a class="paper-link" href="${p.url}" target="_blank" rel="noopener">View paper (PDF)</a>` : ""}
+</article>`).join("");
+const projs = [...listEl.querySelectorAll(".proj")], rowTitles = projs.map(p => p.querySelector(".ttl"));
+const panels = [...stage.querySelectorAll(".panel")], panelTitles = panels.map(p => p.querySelector(".p-title"));
+const glyphs = projs.map(p => p.querySelector(".glyph"));
+
+/* ───────── the one thing you can play with at rest: the heading ───────── */
+const heading = document.getElementById("heading"), hcv = heading.querySelector(".h-cv"), htxt = heading.querySelector(".h-txt");
+const hctx = hcv.getContext("2d");
+let hp = null, hMouse = {x:-1e4, y:-1e4}, hQuiet = 0, hRunning = false;
+function sampleHeading(){
+  const cr = hcv.getBoundingClientRect(), tr = htxt.getBoundingClientRect();
+  if (!cr.width) return null;
+  hcv.width = Math.round(cr.width*DPR); hcv.height = Math.round(cr.height*DPR);
+  const off = document.createElement("canvas"); off.width = hcv.width; off.height = hcv.height;
+  const o = off.getContext("2d"), cs = getComputedStyle(heading);
+  o.scale(DPR, DPR);
+  o.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+  const m = o.measureText("Research"), asc = m.fontBoundingBoxAscent ?? m.actualBoundingBoxAscent, des = m.fontBoundingBoxDescent ?? m.actualBoundingBoxDescent;
+  o.fillStyle = "#000"; o.fillText("Research", tr.left - cr.left, tr.top - cr.top + (tr.height - (asc + des))/2 + asc);
+  const data = o.getImageData(0, 0, off.width, off.height).data, pts = [], st = Math.max(1, Math.round(1.6*DPR));
+  for (let y = 0; y < off.height; y += st) for (let x = 0; x < off.width; x += st)
+    if (data[(y*off.width + x)*4 + 3] > 120) pts.push({hx:x/DPR, hy:y/DPR, x:x/DPR, y:y/DPR, vx:0, vy:0});
+  return pts;
+}
+function heatUp(){
+  if (reduce) return false;
+  if (!hp) hp = sampleHeading();
+  if (!hp) return false;
+  heading.classList.add("live");
+  if (!hRunning) { hRunning = true; requestAnimationFrame(hFrame); }
+  return true;
+}
+function hFrame(){
+  if (!hp) { heading.classList.remove("live"); hRunning = false; return; }
+  const cr = hcv.getBoundingClientRect(), mx = hMouse.x - cr.left, my = hMouse.y - cr.top, R = 64;
+  let moving = 0;
+  for (const p of hp) {
+    const dx = p.x - mx, dy = p.y - my, d2 = dx*dx + dy*dy;
+    if (d2 < R*R) { const d = Math.sqrt(d2) || 1, f = (1 - d/R) * 2.6; p.vx += dx/d*f; p.vy += dy/d*f; }
+    p.vx += (p.hx - p.x) * .05; p.vy += (p.hy - p.y) * .05;
+    p.vx *= .86; p.vy *= .86; p.x += p.vx; p.y += p.vy;
+    moving = Math.max(moving, Math.abs(p.x - p.hx) + Math.abs(p.y - p.hy));
+  }
+  hctx.setTransform(DPR,0,0,DPR,0,0); hctx.clearRect(0, 0, cr.width, cr.height);
+  hctx.fillStyle = theme.fg;
+  for (const p of hp) hctx.fillRect(p.x, p.y, 1.6, 1.6);
+  const near = mx > -R && my > -R && mx < cr.width + R && my < cr.height + R;
+  hQuiet = (moving < .25 && !near) ? hQuiet + 1 : 0;
+  if (hQuiet > 12) { heading.classList.remove("live"); hRunning = false; return; }
+  requestAnimationFrame(hFrame);
+}
+addEventListener("pointermove", e => {
+  hMouse.x = e.clientX; hMouse.y = e.clientY;
+  const r = heading.getBoundingClientRect();
+  if (e.clientX > r.left - 30 && e.clientX < r.right + 30 && e.clientY > r.top - 30 && e.clientY < r.bottom + 30) heatUp();
+}, {passive:true});
+const liftFinger = e => { if (e.pointerType !== "mouse") { hMouse.x = -1e4; hMouse.y = -1e4; } };
+addEventListener("pointerup", liftFinger, {passive:true}); addEventListener("pointercancel", liftFinger, {passive:true});
+heading.addEventListener("click", () => {
+  if (!heatUp()) return;
+  for (const p of hp) { const a = Math.random()*6.283, s = 6 + Math.random()*14; p.vx += Math.cos(a)*s; p.vy += Math.sin(a)*s - 4; }
+});
+addEventListener("resize", () => { if (!hRunning) hp = null; });
+
+/* ───────── row icons ───────── */
+function sizeGlyphs(){ glyphs.forEach(c => { const s = c.clientWidth || 32; c.width = Math.round(s*DPR); c.height = Math.round(s*DPR); }); }
+function drawGlyph(k, t, on){
+  const c = glyphs[k], g = c.getContext("2d"), s = c.clientWidth || 32, u = s/32;
+  g.setTransform(DPR*u,0,0,DPR*u,0,0); g.clearRect(0,0,32,32);
+  g.lineWidth = 1.2; g.strokeStyle = theme.glyph; g.fillStyle = theme.glyph; g.lineCap = "round";
+  const dot = (x,y,r,col) => { g.fillStyle = col; g.beginPath(); g.arc(x,y,r,0,6.283); g.fill(); };
+  if (k === 0) {
+    const w = on ? .5 + .5*Math.sin(t*2.2) : .5, hs = [20, 19 - 9*w, 12 + 2*w];
+    hs.forEach((h,i) => { g.fillStyle = i === 2 ? theme.acc : theme.glyph; g.fillRect(4 + i*9, 29 - h, 6, h); });
+    if (on) { const p = frac(t*.9), q = 1-p, x = q*q*31 + 2*q*p*30 + p*p*25, y = q*q*2 + 2*q*p*6 + p*p*(29 - hs[2] - 2); dot(x, y, 1.6, theme.acc); }
+  } else if (k === 1) {
+    const R = [16,5], M = [[6,15],[16,15],[26,15]], L = [[3,27],[9,27],[13,27],[19,27],[23,27],[29,27]];
+    g.beginPath(); M.forEach(m => { g.moveTo(R[0],R[1]); g.lineTo(m[0],m[1]); }); L.forEach((l,i) => { const m = M[Math.floor(i/2)]; g.moveTo(m[0],m[1]); g.lineTo(l[0],l[1]); }); g.stroke();
+    [R, ...M, ...L].forEach(p => dot(p[0], p[1], 1.6, theme.glyph));
+    if (on) { const path = [L[0], M[0], R, M[2], L[5]], seg = frac(t*.7) * (path.length - 1), i = Math.floor(seg), f = seg - i; dot(lerp(path[i][0], path[i+1][0], f), lerp(path[i][1], path[i+1][1], f), 2.2, theme.acc); }
+  } else if (k === 2) {
+    g.beginPath(); g.arc(16,16,12,0,6.283); g.stroke();
+    const rx = 12*Math.abs(Math.cos(on ? t*1.2 : .9));
+    g.beginPath(); g.ellipse(16,16,Math.max(.5,rx),12,0,0,6.283); g.stroke();
+    g.beginPath(); g.moveTo(4,16); g.lineTo(28,16); g.stroke();
+    g.strokeStyle = theme.acc; g.lineWidth = 1.4;
+    if (on) { g.setLineDash([3,3]); g.lineDashOffset = -t*12; }
+    g.beginPath(); g.moveTo(21,11); g.quadraticCurveTo(30,-2,31,13); g.stroke(); g.setLineDash([]);
+    dot(21,11,1.8,theme.acc);
+  } else {
+    g.beginPath(); g.moveTo(4,3); g.lineTo(4,29); g.lineTo(30,29); g.stroke();
+    [[8,22],[11,24],[12,19],[15,20],[17,17],[19,18],[21,14],[24,15],[26,11],[13,22],[22,17]].forEach(p => dot(p[0],p[1],1.1,theme.glyph));
+    const kap = .55 + (on ? .18*Math.sin(t*1.8) : 0);
+    g.strokeStyle = theme.acc; g.lineWidth = 1.5; g.beginPath(); g.moveTo(6, 25); g.lineTo(29, 25 - kap*23*.85); g.stroke();
+  }
+}
+const drawAllGlyphs = () => { for (let k = 0; k < S; k++) drawGlyph(k, 0, false); };
+themeListeners.push(drawAllGlyphs);
+let hoverK = -1;
+listEl.addEventListener("pointerover", e => { const p = e.target.closest(".proj"); hoverK = p ? +p.dataset.k : -1; });
+listEl.addEventListener("pointerleave", () => { hoverK = -1; });
+
+/* ───────── project view: open, turn, close ───────── */
+let usedKeys = false;
+addEventListener("keydown", () => { usedKeys = true; }, true);
+addEventListener("pointerdown", () => { usedKeys = false; }, true);
+let viewing = false, rot = 0, target = 0, drag = null, pushed = false;
+const clampK = k => Math.max(0, Math.min(S - 1, k));
+const go = k => { target = clampK(Math.round(k)); };
+const activeK = () => clampK(Math.round(rot));
+const prevBtn = document.getElementById("prev"), nextBtn = document.getElementById("next");
+prevBtn.onclick = () => go(Math.round(target) - 1);
+nextBtn.onclick = () => go(Math.round(target) + 1);
+document.getElementById("close").onclick = () => closeView();
+document.getElementById("nav-research").addEventListener("click", e => { if (viewing) { e.preventDefault(); closeView(); } });
+
+function setOrigin(x, y){
+  root.style.setProperty("--cx", x + "px"); root.style.setProperty("--cy", y + "px");
+  root.style.setProperty("--cr", Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 20 + "px");
+}
+function transition(dir, swap, from, to){
+  if (!hasVT) { swap(); return Promise.resolve(); }
+  root.classList.add(dir);
+  if (from) from.style.viewTransitionName = "pt";
+  const t = document.startViewTransition(() => { if (from) from.style.viewTransitionName = ""; if (to) to.style.viewTransitionName = "pt"; swap(); });
+  t.ready.catch(() => {}); t.updateCallbackDone.catch(() => {});
+  return t.finished.catch(() => {}).finally(() => { root.classList.remove(dir); if (to) to.style.viewTransitionName = ""; });
+}
+function openView(k, origin, push = true){
+  if (viewing) { nearestTo(k); return; }
+  const g = glyphs[k].getBoundingClientRect();
+  setOrigin(origin ? origin.x : g.left + g.width/2, origin ? origin.y : g.top + g.height/2);
+  const ox = origin ? origin.x : g.left + g.width/2, oy = origin ? origin.y : g.top + g.height/2;
+  transition("vt-open", () => {
+    viewing = true; root.classList.add("viewing"); view.inert = false; view.scrollTop = 0;
+    rot = target = k; lastActive = -1; sFrom = sTo = k; sM = 1;
+    layoutPanels(); onOpen(ox, oy);
+  }, rowTitles[k], panelTitles[k]).then(() => { if (usedKeys) document.getElementById("close").focus({preventScroll:true}); });
+  if (push) try { history.pushState({p:ids[k]}, "", "#" + ids[k]); pushed = true; } catch { pushed = false; }
+}
+function doClose(){
+  if (!viewing) return;
+  const k = activeK();
+  transition("vt-close", () => { viewing = false; root.classList.remove("viewing"); view.inert = true; })
+    .then(() => { if (usedKeys) rowTitles[k].focus({preventScroll:true}); });
+}
+let skipPop = false;
+function closeView(){                                                      // every way out (button, blank space, Esc, the nav) fades at once
+  if (!viewing) return;
+  doClose();
+  if (pushed) { pushed = false; skipPop = true; history.back(); setTimeout(() => { skipPop = false; }, 600); }
+  else if (location.hash) try { history.replaceState(null, "", location.pathname + location.search); } catch {}
+}
+function nearestTo(k){ go(k); }
+addEventListener("popstate", () => {
+  if (skipPop) { skipPop = false; return; }
+  const k = ids.indexOf(decodeURIComponent(location.hash.slice(1)));
+  if (k >= 0) { if (!viewing) { pushed = false; openView(k, null, false); } else nearestTo(k); }
+  else { pushed = false; doClose(); }
+});
+
+listEl.addEventListener("click", e => {
+  const row = e.target.closest(".row"); if (!row) return;
+  openView(+row.parentElement.dataset.k, e.detail ? {x:e.clientX, y:e.clientY} : null);
+});
+addEventListener("keydown", e => {
+  if (!viewing || e.target.closest("select") || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === "ArrowRight") { go(Math.round(target) + 1); e.preventDefault(); }
+  else if (e.key === "ArrowLeft") { go(Math.round(target) - 1); e.preventDefault(); }
+  else if (e.key === "Escape") { closeView(); e.preventDefault(); }
+});
+
+stage.addEventListener("pointerdown", e => {
+  if (e.button !== 0 || e.target.closest("a,button")) return;
+  if (e.pointerType === "mouse" && e.target.closest(".abs,.p-title,.with")) return;
+  drag = {x:e.clientX, y:e.clientY, r:rot, t:performance.now(), v:0, lx:e.clientX, on:false, id:e.pointerId};
+});
+addEventListener("pointermove", e => {
+  if (!drag || e.pointerId !== drag.id) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  if (!drag.on) {
+    if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)*1.4) { drag.on = true; stage.classList.add("dragging"); getSelection().removeAllRanges(); try { stage.setPointerCapture(e.pointerId); } catch {} }
+    else if (Math.abs(dy) > 10) { drag = null; return; }
+    else return;
+  }
+  const pw = panels[0].offsetWidth || 600, now = performance.now();
+  let r = drag.r - dx / (pw * .9);                                       // past the first or last project it resists, then springs back
+  if (r < 0) r = -(1 - Math.exp(r * 1.5)) * .25; else if (r > S - 1) r = S - 1 + (1 - Math.exp(-(r - S + 1) * 1.5)) * .25;
+  rot = target = r;
+  drag.v = lerp(drag.v, (e.clientX - drag.lx) / Math.max(1, now - drag.t), .5); drag.lx = e.clientX; drag.t = now;
+  e.preventDefault();
+});
+let downAt = null, dragEnd = 0;
+view.addEventListener("pointerdown", e => { downAt = {x:e.clientX, y:e.clientY}; });
+view.addEventListener("click", e => {                                 // a click on the empty page around the project goes back to the list
+  if (!viewing || e.button !== 0 || e.target.closest(".panel,.vbar,a,button,input")) return;
+  if (performance.now() - dragEnd < 120 || (downAt && Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) > 6)) return;
+  if (String(getSelection()).trim()) return;
+  closeView();
+});
+const endDrag = () => { if (!drag) return; if (drag.on) { dragEnd = performance.now(); const pw = panels[0].offsetWidth || 600; target = clampK(Math.round(rot - drag.v * 260 / pw)); } stage.classList.remove("dragging"); drag = null; };
+addEventListener("pointerup", endDrag); addEventListener("pointercancel", endDrag);
+let wheelAcc = 0, wheelLock = 0;
+stage.addEventListener("wheel", e => {
+  if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) * 1.5) return;          // vertical wheel scrolls the abstract
+  e.preventDefault();
+  const now = performance.now(); if (now < wheelLock) return;
+  wheelAcc += e.deltaX;
+  if (Math.abs(wheelAcc) > 70) { go(Math.round(target) + Math.sign(wheelAcc)); wheelAcc = 0; wheelLock = now + 700; }
+}, {passive:false});
+
+const countEl = document.getElementById("count");
+let lastActive = -1, lastRotation = NaN, cardW = -1;
+const pager = document.getElementById("pager");
+pager.innerHTML = PAPERS.map((p, i) => `<button type="button" aria-label="Project ${i+1}"></button>`).join("");
+const dots = [...pager.children]; dots.forEach((b, i) => b.onclick = () => go(i));
+addEventListener("resize", () => { cardW = -1; });
+document.fonts?.ready.then(() => { cardW = -1; });
+function layoutPanels(){
+  if (!viewing) return;
+  const pw = stage.clientWidth || 600;
+  if (pw === cardW && lastRotation === rot && lastActive === activeK()) return;
+  cardW = pw;
+  lastRotation = rot;
+  const step = 26, r = (pw/2) / Math.tan(step/2*Math.PI/180) * 1.02;
+  stage.style.perspectiveOrigin = `${pw/2}px 40%`;
+  panels.forEach((p, i) => {
+    const d = i - rot, a = Math.abs(d);
+    p.style.transform = `translateZ(${-r}px) rotateY(${(d*step).toFixed(3)}deg) translateZ(${r}px)`;
+    p.style.opacity = Math.max(0, 1 - a * 1.35).toFixed(3);
+    p.style.zIndex = String(10 - Math.round(a*2));
+  });
+  const active = activeK();
+  if (active !== lastActive) {
+    flashBackground(active);
+    view.scrollTop = 0;
+    const first = lastActive === -1; lastActive = active;
+    panels.forEach((p,i) => { p.setAttribute("aria-hidden", String(i !== active)); p.inert = i !== active; });
+    countEl.textContent = `${active+1} / ${S}`;
+    prevBtn.disabled = active === 0; nextBtn.disabled = active === S - 1;
+    dots.forEach((b, i) => b.setAttribute("aria-current", String(i === active)));
+    if (!first) try { history.replaceState({p:ids[active]}, "", "#" + ids[active]); } catch {}
+  }
+}
+
+/* ───────── shared clock ───────── */
+let last = performance.now(), T = 0, onOpen = () => {};
+function step(now){
+  const dt = Math.min(.05, Math.max(0, (now - last)/1000)); last = now;
+  if (!reduce) T += dt;
+  if (!drag || !drag.on) rot = reduce ? target : rot + (target - rot) * Math.min(1, dt*5);
+  if (Math.abs(target - rot) < 1e-4) rot = target;
+  layoutPanels();
+  if (!viewing) for (let k = 0; k < S; k++) { const on = k === hoverK; if (on || glyphs[k]._on) { drawGlyph(k, T, on && !reduce); glyphs[k]._on = on; } }
+  return dt;
+}
+
+/* ───────── background particles (WebGL), behind the open project; they move when the view changes ───────── */
+const canvas = document.getElementById("gl");
+const gl = canvas.getContext("webgl", {antialias:true, alpha:true, premultipliedAlpha:true});
+/* Decorative print studies. The outlines and dots are generated patterns. */
+const printCanvas = document.getElementById("print-field");
+const printContext = printCanvas.getContext("2d");
+const bgPicker = document.getElementById("background-choice");
+const backdrop = view.querySelector(".backdrop");
+let backdropUntil = 0;
+function flashBackground(project) {
+  if (reduce) return;
+  drawPrint(project);
+  backdrop.getAnimations().forEach(animation => animation.cancel());
+  backdropUntil = performance.now() + 950;
+  backdrop.animate([{opacity:.36},{opacity:.28,offset:.35},{opacity:0}], {duration:950,easing:"ease-out"});
+}
+const requestedBackground = new URLSearchParams(location.search).get("background");
+const choices = Array.from(bgPicker.options, option => option.value);
+let background = choices.includes(requestedBackground) ? requestedBackground : "particles";
+bgPicker.parentElement.hidden = !choices.includes(requestedBackground);
+bgPicker.value = background;
+function applyBackground() {
+  view.dataset.background = background;
+  printCanvas.hidden = background === "particles";
+  canvas.hidden = background !== "particles";
+}
+bgPicker.addEventListener("change", () => {
+  background = bgPicker.value;
+  const url = new URL(location.href);
+  url.searchParams.set("background", background);
+  history.replaceState(history.state, "", url);
+  applyBackground();
+  flashBackground(activeK());
+  onOpen(innerWidth / 2, innerHeight / 2);
+});
+function drawPrint(project) {
+  if (!viewing || background === "particles" || !printContext) return;
+  const w = printCanvas.clientWidth, h = printCanvas.clientHeight;
+  if (!w || !h) return;
+  const density = Math.min(devicePixelRatio || 1, 2);
+  printCanvas.width = Math.round(w * density);
+  printCanvas.height = Math.round(h * density);
+  const ctx = printContext;
+  ctx.setTransform(density, 0, 0, density, 0, 0);
+  const scale = Math.max(420, Math.min(w, h));
+  const ink = theme.particle, accent = theme.acc;
+  if (background === "contours") {
+    // Two off-centre reliefs. A single index contour uses the accent ink.
+    for (const side of [-1, 1]) {
+      const cx = side < 0 ? -w * .05 : w * 1.03;
+      const cy = h * (side < 0 ? .76 - project * .07 : .18 + project * .08);
+      for (let line = 1; line <= 42; line++) {
+        const radius = line * scale / 57;
+        ctx.beginPath();
+        for (let j = 0; j <= 220; j++) {
+          const a = j * 2 * Math.PI / 220;
+          const r = radius * (1 + .13 * Math.sin(3*a + project + side) + .065 * Math.cos(5*a + radius / scale*3));
+          const x = cx + r * Math.cos(a), y = cy + .83 * r * Math.sin(a);
+          if (j === 0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = line === 18 ? accent : ink;
+        ctx.lineWidth = line % 6 === 0 ? 1.25 : .75;
+        ctx.globalAlpha = line === 18 ? .55 : .27;
+        ctx.stroke();
+      }
+    }
+  } else if (background === "folds") {
+    // Wide planes share their hinge; a gradient on one face suggests depth.
+    ctx.translate(w * (.55 + .05 * project), h * .50);
+    ctx.rotate((project - 1.5) * .065 - .26);
+    const reach = Math.hypot(w,h), pitch = scale * .28;
+    for (let i = -Math.ceil(reach/pitch); i < reach/pitch; i++) {
+      const x = i * pitch, ridge = x + pitch * .72;
+      const gradient = ctx.createLinearGradient(x,0,x+pitch,0);
+      gradient.addColorStop(0, "transparent");
+      gradient.addColorStop(.72, ink);
+      gradient.addColorStop(.725, "transparent");
+      gradient.addColorStop(1, "transparent");
+      ctx.globalAlpha = theme.dark ? .13 : .105;
+      ctx.fillStyle = gradient;
+      ctx.fillRect(x,-reach,pitch,2*reach);
+      ctx.globalAlpha = i === 1 ? .48 : .21;
+      ctx.strokeStyle = i === 1 ? accent : ink;
+      ctx.lineWidth = .8;
+      ctx.beginPath(); ctx.moveTo(ridge,-reach); ctx.lineTo(ridge,reach); ctx.stroke();
+    }
+  } else if (background === "halftone") {
+    // Two overlapping ink screens, each with its own angle and dot size.
+    for (let pass = 0; pass < 2; pass++) {
+      ctx.save();
+      ctx.translate(w * (pass ? .87 : .09), h * (pass ? .72 - .08*project : .22 + .07*project));
+      ctx.rotate((pass ? -.36 : .24) + project * .065);
+      const pitch = scale / 62, width = scale * .61, height = scale * .32;
+      ctx.fillStyle = pass ? accent : ink;
+      ctx.globalAlpha = theme.dark ? .44 : .36;
+      ctx.beginPath();
+      for (let y = -height; y <= height; y += pitch) {
+        for (let x = -width; x <= width; x += pitch) {
+          const weight = 1 - (x/width)**2 - (y/height)**2;
+          if (weight <= .04) continue;
+          const r = pitch * .48 * weight;
+          ctx.moveTo(x+r,y); ctx.arc(x,y,r,0,2*Math.PI);
+        }
+      }
+      ctx.fill(); ctx.restore();
+    }
+  }
+
+}
+applyBackground();
+addEventListener("resize", () => drawPrint(activeK()));
+themeListeners.push(() => drawPrint(activeK()));
+
+function boot(){
+  readTheme(); sizeGlyphs(); drawAllGlyphs();
+  (document.fonts?.ready || Promise.resolve()).then(() => setTimeout(() => {      // the heading gathers itself once, on load
+    hp = null; if (!heatUp()) return;
+    for (const p of hp) { p.x = p.hx + (Math.random()-.5)*520; p.y = p.hy + (Math.random()-.5)*240; p.vx = (Math.random()-.5)*6; p.vy = (Math.random()-.5)*6; }
+  }, 120));
+  const k = ids.indexOf(decodeURIComponent(location.hash.slice(1)));             // a shared link opens its project directly
+  if (k >= 0) { viewing = true; root.classList.add("viewing"); view.inert = false; rot = target = k; sFrom = sTo = k; onOpen(innerWidth/2, innerHeight/2); }
+}
+let sFrom = 0, sTo = 0, sM = 1, sDir = 1;
+if (!gl) {
+  bgPicker.querySelector('[value="particles"]').disabled = true;
+  if (background === "particles") { background = "contours"; bgPicker.value = background; applyBackground(); }
+  canvas.remove(); boot(); const loop = now => { step(now); requestAnimationFrame(loop); }; requestAnimationFrame(loop); return; }
+
+const N = innerWidth < 700 ? 3600 : 6500;
+const R1 = new Float32Array(N), R2 = new Float32Array(N), R3 = new Float32Array(N), R4 = new Float32Array(N), G1 = new Float32Array(N), G2 = new Float32Array(N), DX = new Float32Array(N*3);
+let seed = 7;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+for (let i = 0; i < N; i++) {
+  R1[i]=rnd(); R2[i]=rnd(); R3[i]=rnd(); R4[i]=rnd();
+  const u = Math.max(1e-6, rnd()), v = rnd(), m = Math.sqrt(-2*Math.log(u));
+  G1[i] = m*Math.cos(6.2832*v); G2[i] = m*Math.sin(6.2832*v);
+  const a = rnd()*6.2832, b = Math.acos(2*rnd()-1);
+  DX[i*3]=Math.sin(b)*Math.cos(a); DX[i*3+1]=Math.cos(b); DX[i*3+2]=Math.sin(b)*Math.sin(a);
+}
+
+/* four quiet shapes, one per project; they carry no meaning. HW is the half-width of the screen in world units */
+let HW = 4;
+const acc = i => R4[i] < .07 ? 1 : 0;
+function sheet(i,t,o){                                                       // a field of points rolling like a slow sea
+  const x = (R1[i]*2 - 1)*HW*1.5, z = -7 + R2[i]*8.5;
+  o[0] = x; o[2] = z; o[1] = -2.3 + .32*Math.sin(x*.7 + t*.9)*Math.cos(z*.55 - t*.6) + .12*Math.sin(x*1.7 - z + t*1.3);
+  o[3] = acc(i); o[4] = .9;
+}
+function ring(i,t,o){                                                         // a wide tilted ring around the page
+  const a = R1[i]*6.2832 + t*.12, r = HW*.86 + G1[i]*.09*(1 + R3[i]), w = G2[i]*.06;
+  const x = Math.cos(a)*r, y = w, z = Math.sin(a)*r, ct = Math.cos(.32), st = Math.sin(.32);
+  o[0] = x; o[1] = y*ct - z*st*.9 + .2; o[2] = y*st + z*ct*.9 - 1.5;
+  if (R2[i] < .25) { o[0] = (R3[i]*2-1)*HW*1.2; o[1] = (R1[i]*2-1)*3.2; o[2] = -4 + R4[i]*3; }  // a little dust
+  o[3] = acc(i); o[4] = R2[i] < .25 ? .6 : .9;
+}
+function vortex(i,t,o){                                                       // a slow spiral, seen from slightly above
+  const arm = i % 3, r = Math.sqrt(R1[i])*HW*1.15, a = arm*2.0944 + r*.55 - t*.08 + G1[i]*.22;
+  o[0] = Math.cos(a)*r; o[2] = Math.sin(a)*r*.9 - 2.5; o[1] = -1.3 + Math.sin(a)*r*.18 + G2[i]*.06;
+  o[3] = acc(i); o[4] = .85;
+}
+function strands(i,t,o){                                                      // threads drifting across the page
+  const k = i % 11, x = (R1[i]*2 - 1)*HW*1.15;
+  o[0] = x; o[1] = -3.1 + k*.5 + .28*Math.sin(x*.55 + k*1.3 + t*.5) + G1[i]*.025; o[2] = -1.6 + Math.sin(k*2.1)*1.2 + G2[i]*.05;
+  o[3] = k === 4 ? 1 : acc(i)*0; o[4] = .8;
+}
+const F = [sheet, ring, vortex, strands];
+
+const vs = `
+attribute vec3 aP; attribute float aC; attribute float aS;
+uniform mat4 uV, uP; uniform float uPix, uSize, uDist;
+varying float vC; varying float vA;
+void main(){
+  vec4 mv = uV * vec4(aP,1.);
+  gl_Position = uP * mv;
+  float z = -mv.z;
+  gl_PointSize = max(1., uSize * aS * uPix / z);
+  vC = aC;
+  vA = (aS > 0.001 ? 1. : 0.) * clamp(1.25 - (z - uDist*.7) / (uDist*1.3), .2, 1.);
+}`;
+const fs = `
+precision mediump float;
+uniform vec3 uBase, uAcc; uniform float uAlpha;
+varying float vC; varying float vA;
+void main(){
+  float d = length(gl_PointCoord - .5);
+  float a = smoothstep(.5, .2, d) * vA * uAlpha * (1. + vC * .4);
+  gl_FragColor = vec4(mix(uBase, uAcc, vC) * a, a);
+}`;
+function sh(type, src){ const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+const prog = gl.createProgram();
+gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog); gl.useProgram(prog);
+const U = n => gl.getUniformLocation(prog, n);
+const uV=U("uV"), uP=U("uP"), uPix=U("uPix"), uSize=U("uSize"), uBase=U("uBase"), uAcc=U("uAcc"), uAlpha=U("uAlpha"), uDist=U("uDist");
+const pos = new Float32Array(N*3), col = new Float32Array(N), siz = new Float32Array(N);
+function buf(name, arr, n){ const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, arr, gl.DYNAMIC_DRAW); const l = gl.getAttribLocation(prog, name); gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, n, gl.FLOAT, false, 0, 0); return b; }
+const bP = buf("aP", pos, 3), bC = buf("aC", col, 1), bS = buf("aS", siz, 1);
+gl.disable(gl.DEPTH_TEST); gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); gl.clearColor(0,0,0,0);
+const rgb = v => { const m = (v||"").match(/^#([0-9a-f]{6})$/i); return m ? [0,2,4].map(k => parseInt(m[1].slice(k,k+2),16)/255) : [.5,.5,.5]; };
+themeListeners.push(() => { gl.uniform3fv(uBase, rgb(theme.particle)); gl.uniform3fv(uAcc, rgb(theme.acc)); });
+
+let W = 1, H = 1;
+let CT = 60;
+function resize(){ DPR = Math.min(2, devicePixelRatio || 1); CT = canvas.getBoundingClientRect().top || 60; W = innerWidth; H = Math.max(1, innerHeight - CT); canvas.width = Math.round(W*DPR); canvas.height = Math.round(H*DPR); gl.viewport(0,0,canvas.width,canvas.height); sizeGlyphs(); drawAllGlyphs(); }
+addEventListener("resize", resize);
+
+/* the motion: opening bursts the points out from where you clicked; switching projects sweeps them sideways
+   into the next shape; otherwise they barely move */
+const FOV = 40*Math.PI/180, TH = Math.tan(FOV/2), DIST = 3.2/TH;
+let energy = 0, ft = 0, openM = 1, ox = 0, oy = 0;
+onOpen = (cx, cy) => {
+  if (reduce) return;
+  openM = 0; energy = 1;
+  HW = 3.2 * W / H;
+  ox = (cx / W * 2 - 1) * HW; oy = (1 - (cy - CT) / H * 2) * 3.2;           // the canvas starts under the header
+};
+resize(); boot();
+
+function persp(fovy, asp, n, f){ const t = 1/Math.tan(fovy/2), nf = 1/(n-f); return new Float32Array([t/asp,0,0,0, 0,t,0,0, 0,0,(f+n)*nf,-1, 0,0,2*f*n*nf,0]); }
+function lookAt(e, c){
+  let zx=e[0]-c[0], zy=e[1]-c[1], zz=e[2]-c[2]; let l=Math.hypot(zx,zy,zz); zx/=l; zy/=l; zz/=l;
+  let xx = zz, xz = -zx; l = Math.hypot(xx,xz) || 1; xx/=l; xz/=l;
+  const yx = zy*xz, yy = zz*xx - zx*xz, yz = -zy*xx;
+  return new Float32Array([xx,yx,zx,0, 0,yy,zy,0, xz,yz,zz,0, -(xx*e[0]+xz*e[2]), -(yx*e[0]+yy*e[1]+yz*e[2]), -(zx*e[0]+zy*e[1]+zz*e[2]), 1]);
+}
+
+const A = new Float32Array(5), B = new Float32Array(5);
+let cleared = true;
+function frame(now){
+  const dt = step(now);
+  if (!viewing || background !== "particles" || now >= backdropUntil) {
+    if (!cleared) { gl.clear(gl.COLOR_BUFFER_BIT); cleared = true; }
+    requestAnimationFrame(frame); return;
+  }
+  cleared = false;
+  const k = activeK();
+  if (k !== sTo) { sDir = Math.sign(k - sTo) || 1; if (sM >= .5) sFrom = sTo; sTo = k; sM = 0; energy = 1; }
+  if (!reduce) {
+    sM = Math.min(1, sM + dt / 1.3); openM = Math.min(1, openM + dt / 1.5);
+    energy *= Math.exp(-dt / .9); ft += dt * (.1 + 1.4*energy);
+  } else { sM = 1; openM = 1; }
+  HW = 3.2 * W / H;
+  const m = sM, a = sFrom, b = sTo, mixing = sM < 1 && a !== b, opening = openM < 1;
+  const wig = reduce ? 0 : .075 + .22*energy, wt = T;                     // every point wriggles on its own rhythm, more while things change
+  for (let i = 0; i < N; i++) {
+    F[mixing ? a : b](i, ft, A);
+    let x=A[0], y=A[1], z=A[2], c=A[3], s=A[4];
+    if (mixing) {                                                           // sweep sideways into the next shape, each point on its own beat
+      F[b](i, ft, B);
+      const mi = ss(0, 1, m*1.5 - R3[i]*.5), arc = Math.sin(mi*Math.PI);
+      x = lerp(x,B[0],mi) - sDir*arc*(1.2 + 1.8*R2[i]); y = lerp(y,B[1],mi) + DX[i*3+1]*arc*.5; z = lerp(z,B[2],mi) + DX[i*3+2]*arc*.8;
+      c = lerp(c,B[3],mi); s = lerp(s,B[4],mi);
+    }
+    if (opening) {                                                          // burst out from the click
+      const d = Math.hypot(x - ox, y - oy) / (HW*2), mo = ss(0, 1, openM*1.6 - d*.5 - R1[i]*.1);
+      x = lerp(ox + DX[i*3]*.2, x, mo); y = lerp(oy + DX[i*3+1]*.2, y, mo); z = lerp(DX[i*3+2]*.2, z, mo);
+    }
+    if (wig) {
+      const ph = R1[i]*61.3, f1 = 1.1 + R2[i]*2.2, f2 = .9 + R3[i]*2.6, w = wig*(.45 + R4[i]*1.1);
+      x += (Math.sin(wt*f1 + ph) + .6*Math.sin(wt*f2*.43 + ph*1.7)) * w;
+      y += (Math.cos(wt*f2 + ph*1.3) + .5*Math.sin(wt*f1*.57 + ph*.7)) * w * .8;
+      z += Math.sin(wt*f1*.8 + ph*2.3) * w;
+    }
+    pos[i*3]=x; pos[i*3+1]=y; pos[i*3+2]=z; col[i]=c; siz[i]=s;
+  }
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  const sx = (rot - Math.round(rot)) * -HW*.35;                            // dragging the panels nudges the field
+  const V0 = lookAt([sx, 0, DIST], [sx, 0, 0]), P0m = persp(FOV, W / H, .1, 200);
+  gl.uniformMatrix4fv(uV, false, V0); gl.uniformMatrix4fv(uP, false, P0m);
+  gl.uniform1f(uDist, DIST); gl.uniform1f(uPix, DPR);
+  gl.uniform1f(uSize, 2.5 * DIST * Math.max(.75, Math.min(1.3, H / 800)));
+  gl.uniform1f(uAlpha, theme.dark ? .62 : .52);
+  gl.bindBuffer(gl.ARRAY_BUFFER, bP); gl.bufferSubData(gl.ARRAY_BUFFER, 0, pos);
+  gl.bindBuffer(gl.ARRAY_BUFFER, bC); gl.bufferSubData(gl.ARRAY_BUFFER, 0, col);
+  gl.bindBuffer(gl.ARRAY_BUFFER, bS); gl.bufferSubData(gl.ARRAY_BUFFER, 0, siz);
+  gl.drawArrays(gl.POINTS, 0, N);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+})();
+</script>
