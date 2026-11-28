@@ -6,6 +6,7 @@ baseurl: ""
 include:
   - index.html
   - research
+  - services-trade.pdf
   - robots.txt
   - sitemap.xml
   - cv
